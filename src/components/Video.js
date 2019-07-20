@@ -23,6 +23,7 @@ class Video extends Component{
         
         this.drone = new window.ScaleDrone('sXJT2grQOdaK4zdB');
         this.room= this.drone.subscribe(this.roomName);
+        console.log(this.pc);
     }
     handleSuccess = (stream)=> {
         console.log(this.audio)
@@ -56,7 +57,7 @@ class Video extends Component{
         });
        }
     
-    localDescCreated(desc) {
+    localDescCreated = (desc) => {
         this.pc.setLocalDescription(
           desc,
           () => this.sendMessage({'sdp': this.pc.localDescription}),
@@ -82,7 +83,7 @@ class Video extends Component{
         
         // When a remote stream arrives display it in the #remoteVideo element
         this.pc.onaddstream = event => {
-          this.remotevideo.srcObject = event.stream;
+          this.remotevideo.current.srcObject = event.stream;
         };
         console.log("in this one !")
         navigator.mediaDevices.getUserMedia({
